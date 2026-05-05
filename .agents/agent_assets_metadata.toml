@@ -1,0 +1,50 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "94fQw5Ah3-qM4GNoD4-sr"
+uri = "file://deployer-keypair.json"
+type = "unspecified"
+title = "deployer-keypair.json (Deploy Wallet)"
+
+[[outputs]]
+id = "lb_wxCXzINO99YWjMD_RX"
+uri = "file://program/target/deploy/private_transfer-keypair.json"
+type = "unspecified"
+title = "private_transfer-keypair.json (Program Keypair)"
+
+[[outputs]]
+id = "cg4dFgrGQy52ldSGpCUVj"
+uri = "file://docs/api.md"
+type = "text"
+title = "D3FAULT API Reference"
+
+[[outputs]]
+id = "mezwfZ5swdsm4mShrdNfk"
+uri = "file://docs/status.md"
+type = "text"
+title = "Status Page Spec"
+
+[[outputs]]
+id = "yuLx9VD-SFAsD6h0Xjjq7"
+uri = "file://attached_assets/api.md"
+type = "text"
+title = "D3FAULT API Reference"
+
+[[outputs]]
+id = "gepp5DJNcQ0-LSyiU3ECo"
+uri = "file://attached_assets/status.md"
+type = "text"
+title = "Status Page Spec"
+
+[[outputs]]
+id = "YY5nf734BZSZ9cUMGz5Bw"
+uri = "file://d3fault-public.zip"
+type = "unspecified"
+title = "d3fault-public.zip (41.6 MB)"
+
+[[outputs]]
+id = "29VCYTptk2Hgu-btCZTyF"
+uri = "file://d3fault-src.zip"
+type = "unspecified"
+title = "d3fault-src.zip — source only (1 MB, 241 files)"

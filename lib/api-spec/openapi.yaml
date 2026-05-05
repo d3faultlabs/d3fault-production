@@ -1,0 +1,194 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: relay
+    description: Privacy relayer operations
+  - name: program
+    description: On-chain program info
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /program-info:
+    get:
+      operationId: getProgramInfo
+      tags: [program]
+      summary: On-chain program metadata
+      description: Returns the program ID, network, and RPC endpoint in use
+      responses:
+        "200":
+          description: Program info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProgramInfo"
+
+  /relay-withdraw:
+    post:
+      operationId: relayWithdraw
+      tags: [relay]
+      summary: Relay a private withdrawal
+      description: |
+        Accepts a signed commitment-nullifier withdrawal request and submits it
+        on-chain using the relayer keypair so the recipient address never appears
+        in the deposit transaction.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RelayWithdrawRequest"
+      responses:
+        "200":
+          description: Transaction submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RelayWithdrawResponse"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RelayError"
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RelayError"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RelayError"
+
+  /price:
+    get:
+      operationId: getTokenPrice
+      tags: [program]
+      summary: Token price lookup
+      description: Returns USD price for a token mint address via CoinGecko/Birdeye
+      parameters:
+        - name: mint
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Token mint address (use So11111111111111111111111111111111111111112 for SOL)
+      responses:
+        "200":
+          description: Token price
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenPrice"
+        "404":
+          description: Token not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RelayError"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    ProgramInfo:
+      type: object
+      properties:
+        programId:
+          type: string
+          description: On-chain program public key
+        network:
+          type: string
+          enum: [devnet, mainnet-beta]
+        rpcEndpoint:
+          type: string
+        relayerPublicKey:
+          type: string
+          description: Public key of the relayer keypair (for fee estimation)
+      required:
+        - programId
+        - network
+        - rpcEndpoint
+        - relayerPublicKey
+
+    RelayWithdrawRequest:
+      type: object
+      properties:
+        secret:
+          type: string
+          description: 64-char hex string (32 bytes). Relayer computes commitment=sha256(secret) to find the on-chain entry.
+        recipient:
+          type: string
+          description: Base58 public key of recipient wallet
+      required:
+        - secret
+        - recipient
+
+    RelayWithdrawResponse:
+      type: object
+      properties:
+        signature:
+          type: string
+          description: Transaction signature on Solana
+        explorerUrl:
+          type: string
+          description: Solana Explorer URL for the transaction
+      required:
+        - signature
+        - explorerUrl
+
+    TokenPrice:
+      type: object
+      properties:
+        mint:
+          type: string
+        symbol:
+          type: string
+        usdPrice:
+          type: number
+        change24h:
+          type: number
+          description: 24-hour price change percentage
+      required:
+        - mint
+        - usdPrice
+
+    RelayError:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+      required:
+        - error

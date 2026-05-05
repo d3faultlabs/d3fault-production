@@ -1,0 +1,82 @@
+# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# ─── Environment / Secrets ────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.local
+*.secret
+
+# ─── Keypairs & Wallets ───────────────────────────────────────────────────────
+*keypair*.json
+*-keypair.json
+deployer-keypair.json
+relayer-keypair.json
+wallet.json
+
+# ─── Anchor / Solana ──────────────────────────────────────────────────────────
+program/target/
+program/.anchor/
+**/.anchor/
+test-ledger/
+
+# ─── Node / pnpm ──────────────────────────────────────────────────────────────
+node_modules/
+**/node_modules/
+
+# ─── Build Output ─────────────────────────────────────────────────────────────
+dist/
+**/dist/
+build/
+**/build/
+*.tsbuildinfo
+out-tsc/
+tmp/
+
+# ─── Rust / Cargo ─────────────────────────────────────────────────────────────
+target/
+**/target/
+
+# ─── Replit-specific ──────────────────────────────────────────────────────────
+.replit
+replit.nix
+.local/
+.cache/
+attached_assets/
+
+# ─── Archives (build artefacts) ──────────────────────────────────────────────
+*.tar.gz
+d3fault-public.zip
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ─── OS & Editor ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+.expo
+.expo-shared
+
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md

@@ -1,0 +1,178 @@
+{
+  "address": "11111111111111111111111111111111",
+  "metadata": {
+    "name": "private_transfer",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        { "name": "commitmentStore", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [99,111,109,109,105,116,109,101,110,116,95,115,116,111,114,101] }] } },
+        { "name": "authority", "writable": true, "signer": true },
+        { "name": "systemProgram", "address": "11111111111111111111111111111111" }
+      ],
+      "args": []
+    },
+    {
+      "name": "depositSol",
+      "accounts": [
+        { "name": "commitmentStore", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [99,111,109,109,105,116,109,101,110,116,95,115,116,111,114,101] }] } },
+        { "name": "depositor", "writable": true, "signer": true },
+        { "name": "systemProgram", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [
+        { "name": "commitment", "type": { "array": ["u8", 32] } },
+        { "name": "amount", "type": "u64" },
+        { "name": "expiry", "type": "i64" }
+      ]
+    },
+    {
+      "name": "depositSpl",
+      "accounts": [
+        { "name": "commitmentStore", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [99,111,109,109,105,116,109,101,110,116,95,115,116,111,114,101] }] } },
+        { "name": "depositor", "writable": true, "signer": true },
+        { "name": "tokenMint", "writable": false },
+        { "name": "depositorTokenAccount", "writable": true },
+        { "name": "escrowTokenAccount", "writable": true },
+        { "name": "tokenProgram", "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" },
+        { "name": "associatedTokenProgram", "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJe1bRS" },
+        { "name": "systemProgram", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [
+        { "name": "commitment", "type": { "array": ["u8", 32] } },
+        { "name": "amount", "type": "u64" },
+        { "name": "expiry", "type": "i64" }
+      ]
+    },
+    {
+      "name": "withdrawSol",
+      "accounts": [
+        { "name": "commitmentStore", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [99,111,109,109,105,116,109,101,110,116,95,115,116,111,114,101] }] } },
+        { "name": "nullifierRecord", "writable": true },
+        { "name": "recipient", "writable": true },
+        { "name": "relayer", "writable": true, "signer": true },
+        { "name": "systemProgram", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [
+        { "name": "nullifier", "type": { "array": ["u8", 32] } },
+        { "name": "secret", "type": { "array": ["u8", 32] } }
+      ]
+    },
+    {
+      "name": "withdrawSpl",
+      "accounts": [
+        { "name": "commitmentStore", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [99,111,109,109,105,116,109,101,110,116,95,115,116,111,114,101] }] } },
+        { "name": "nullifierRecord", "writable": true },
+        { "name": "recipient", "writable": true },
+        { "name": "tokenMint", "writable": false },
+        { "name": "escrowTokenAccount", "writable": true },
+        { "name": "recipientTokenAccount", "writable": true },
+        { "name": "relayer", "writable": true, "signer": true },
+        { "name": "tokenProgram", "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" },
+        { "name": "associatedTokenProgram", "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJe1bRS" },
+        { "name": "systemProgram", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [
+        { "name": "nullifier", "type": { "array": ["u8", 32] } },
+        { "name": "secret", "type": { "array": ["u8", 32] } }
+      ]
+    },
+    {
+      "name": "reclaimSol",
+      "accounts": [
+        { "name": "commitmentStore", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [99,111,109,109,105,116,109,101,110,116,95,115,116,111,114,101] }] } },
+        { "name": "depositor", "writable": true, "signer": true },
+        { "name": "systemProgram", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [
+        { "name": "commitment", "type": { "array": ["u8", 32] } }
+      ]
+    },
+    {
+      "name": "reclaimSpl",
+      "accounts": [
+        { "name": "commitmentStore", "writable": true, "pda": { "seeds": [{ "kind": "const", "value": [99,111,109,109,105,116,109,101,110,116,95,115,116,111,114,101] }] } },
+        { "name": "depositor", "writable": true, "signer": true },
+        { "name": "tokenMint", "writable": false },
+        { "name": "escrowTokenAccount", "writable": true },
+        { "name": "depositorTokenAccount", "writable": true },
+        { "name": "tokenProgram", "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" },
+        { "name": "associatedTokenProgram", "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJe1bRS" },
+        { "name": "systemProgram", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [
+        { "name": "commitment", "type": { "array": ["u8", 32] } }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "CommitmentStore",
+      "discriminator": [0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "name": "NullifierRecord",
+      "discriminator": [0, 0, 0, 0, 0, 0, 0, 1]
+    }
+  ],
+  "types": [
+    {
+      "name": "CommitmentStore",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "count", "type": "u64" },
+          { "name": "entries", "type": { "vec": { "defined": { "name": "CommitmentEntry" } } } }
+        ]
+      }
+    },
+    {
+      "name": "NullifierRecord",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "nullifier", "type": { "array": ["u8", 32] } }
+        ]
+      }
+    },
+    {
+      "name": "CommitmentEntry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "commitment", "type": { "array": ["u8", 32] } },
+          { "name": "amount", "type": "u64" },
+          { "name": "expiry", "type": "i64" },
+          { "name": "tokenMint", "type": { "array": ["u8", 32] } },
+          { "name": "claimed", "type": "bool" },
+          { "name": "depositor", "type": "publicKey" }
+        ]
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "DepositEvent",
+      "discriminator": [0, 0, 0, 0, 0, 0, 0, 2]
+    },
+    {
+      "name": "WithdrawEvent",
+      "discriminator": [0, 0, 0, 0, 0, 0, 0, 3]
+    }
+  ],
+  "errors": [
+    { "code": 6000, "name": "InvalidSecret", "msg": "Invalid secret: commitment mismatch" },
+    { "code": 6001, "name": "NullifierAlreadyUsed", "msg": "Nullifier has already been used" },
+    { "code": 6002, "name": "CommitmentNotFound", "msg": "Commitment not found or already claimed" },
+    { "code": 6003, "name": "DuplicateCommitment", "msg": "Duplicate commitment: already exists in store" },
+    { "code": 6004, "name": "TokenMintMismatch", "msg": "Token mint does not match the commitment entry" },
+    { "code": 6005, "name": "Expired", "msg": "Claim link has expired" },
+    { "code": 6006, "name": "NotExpired", "msg": "Cannot reclaim before expiry" },
+    { "code": 6007, "name": "StoreCapacityReached", "msg": "Commitment store is full" },
+    { "code": 6008, "name": "InsufficientFunds", "msg": "Escrow has insufficient funds" },
+    { "code": 6009, "name": "ZeroAmount", "msg": "Amount must be greater than zero" },
+    { "code": 6010, "name": "UnauthorizedReclaim", "msg": "Only the original depositor may reclaim this commitment" }
+  ]
+}

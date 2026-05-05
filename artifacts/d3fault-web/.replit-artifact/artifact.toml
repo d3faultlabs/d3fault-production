@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "D3FAULT"
+version = "1.0.0"
+id = "artifacts/d3fault-web"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24930
+
+[services.development]
+run = "pnpm --filter @workspace/d3fault-web run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/d3fault-web", "run", "build" ]
+publicDir = "artifacts/d3fault-web/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24930"
+BASE_PATH = "/"
