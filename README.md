@@ -61,7 +61,7 @@ D3FAULT is a privacy-transfer protocol built on Solana. It uses a commitment–n
 | API server | Express 5 |
 | Database | PostgreSQL + Drizzle ORM |
 | Validation | Zod v4, drizzle-zod |
-| On-chain | Anchor 0.31.1, Rust (Solana BPF) |
+| On-chain | Anchor 0.29.0, Rust (Solana BPF) |
 | Build | esbuild (API), Vite (frontend) |
 
 ---
