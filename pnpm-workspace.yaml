@@ -43,6 +43,12 @@ onlyBuiltDependencies:
   - unrs-resolver
 
 overrides:
+  # Security fixes — transitive dependency overrides
+  protobufjs: '>=7.5.5'
+  lodash: '>=4.18.0'
+  axios: '>=1.15.2'
+  picomatch: '>=4.0.4'
+  path-to-regexp: '>=8.4.0'
   '@esbuild-kit/esm-loader': npm:tsx@^4.21.0
   '@expo/ngrok-bin>@expo/ngrok-bin-darwin-arm64': '-'
   '@expo/ngrok-bin>@expo/ngrok-bin-darwin-x64': '-'
