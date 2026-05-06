@@ -29,6 +29,9 @@ jobs:
       - name: Dependency audit
         run: pnpm audit --audit-level=critical
 
+      - name: Build lib packages
+        run: pnpm run typecheck:libs
+
       - name: Typecheck — api-server
         run: pnpm --filter @workspace/api-server run typecheck
 
