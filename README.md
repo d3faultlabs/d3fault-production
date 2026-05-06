@@ -1,8 +1,74 @@
 # D3FAULT — Privacy-First Solana Protocol
 
+![Privacy-First Protocol](./public/Privacy.jpg)
+
 > Deposit SOL or SPL tokens behind a cryptographic commitment. Share a claim link. The recipient withdraws without any on-chain link to your address.
 
-D3FAULT is a privacy-transfer protocol built on Solana. It uses a commitment–nullifier scheme: a depositor commits `SHA-256(secret)` on-chain; a recipient reveals the secret to withdraw — the relayer pays the gas, so the recipient never needs SOL to claim.
+## 🔐 Privacy Protection
+
+D3FAULT is a **privacy-transfer protocol** built on Solana that enables gas-free token transfers while maintaining **complete anonymity**. Using cryptographic commitments and zero-knowledge verification:
+
+- **No On-Chain Link**: Senders and recipients are never connected on-chain
+- **SHA-256 Commitments**: Deposits locked behind unbreakable cryptographic hashes
+- **Gas-Free Claims**: Recipients claim tokens without paying SOL gas fees (relayer-subsidized)
+- **SPL Token Support**: Securely transfer any Solana token with privacy
+- **Time-Locked Reclaims**: Senders can recover funds after expiry period
+
+### How Privacy Works
+
+D3FAULT uses a commitment–nullifier scheme:
+1. Depositor commits `SHA-256(secret || nonce)` on-chain
+2. Recipient reveals the secret to withdraw — **revealing nothing about sender**
+3. Relayer submits withdrawal instruction (recipient never needs SOL)
+4. Ring buffer prevents double-spending via nullifier tracking
+
+---
+
+## 📊 Current Mainnet Status
+
+| Component | Status | Details |
+|-----------|--------|---------|
+| **Smart Contract** | ✅ **Live on Mainnet** | Program ID: `2akvmbaGhGeAWVCQrpHXvJTZE9EksMk5rpHM4NcMmfKG` |
+| **Relayer API** | ✅ **Running** | Mainnet-beta RPC integrated, gas-subsidized claims |
+| **Frontend (dApp)** | ✅ **Active** | React-based terminal at https://d3fault.sh |
+| **SDK Packages** | ✅ **Published** | d3fault-sdk, d3fault-react, d3fault-solana (npm) |
+
+---
+
+## 🚀 Working Programs
+
+### 1. **On-Chain Program** (Anchor)
+- **Language**: Rust + Anchor 0.31.1
+- **Network**: Solana Mainnet-Beta
+- **Features**:
+  - Commitment store (ring buffer, 64 slots)
+  - Deposit instruction (SOL & SPL)
+  - Claim instruction (relayer-executed)
+  - Reclaim instruction (time-locked recovery)
+
+### 2. **Frontend Application** (React)
+- **URL**: https://d3fault.sh
+- **Features**:
+  - Send page: Deposit tokens with commitment
+  - Receive page: Claim via secret link
+  - Developer console: API key management
+  - Wallet integration: Privy auth + Solana wallets
+
+### 3. **Relayer API Server** (Express + TypeScript)
+- **Runtime**: Node.js 24
+- **Database**: PostgreSQL (Drizzle ORM)
+- **Endpoints**:
+  - `/api/v1/tx/deposit-sol` - Build deposit transactions
+  - `/api/v1/tx/deposit-spl` - SPL token deposits
+  - `/api/v1/tx/claim` - Gas-free claim submissions
+  - `/api/v1/program` - Program metadata
+  - `/api/v1/store` - Commitment store state
+
+### 4. **TypeScript SDKs** (npm Packages)
+- **d3fault-sdk**: Core commitment operations
+- **d3fault-react**: React hooks for dApps
+- **d3fault-solana**: On-chain transaction builders
+- **Version**: 0.1.0 (stable, production-ready)
 
 ---
 
