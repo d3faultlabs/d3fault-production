@@ -11,6 +11,21 @@ commitments on Solana from any backend. All public endpoints live under the
 
 ---
 
+## ⚠️ CRITICAL SECURITY WARNING
+
+**API keys MUST ONLY be used from your backend server.**
+
+- ❌ **NEVER** expose API keys in client-side code, browser, or frontend apps
+- ❌ **NEVER** commit API keys to version control
+- ❌ **NEVER** share API keys with untrusted parties
+- ✅ **ALWAYS** use HTTPS for all API requests
+- ✅ **ALWAYS** store API keys in secure backend environment variables
+- ✅ **ALWAYS** use a secrets manager (1Password, Vault, AWS Secrets Manager)
+
+Exposed API keys can be used to impersonate your account and drain funds.
+
+---
+
 ## Authentication
 
 Every `/api/v1/*` request (other than the key-management routes under

@@ -24,8 +24,17 @@ let _authTokenGetter: AuthTokenGetter | null = null;
  *
  * Useful for Expo bundles that need to call a remote API server.
  * Pass `null` to clear the base URL.
+ *
+ * ⚠️ SECURITY: baseUrl MUST use HTTPS to protect API keys from exposure.
  */
 export function setBaseUrl(url: string | null): void {
+  if (url && !url.startsWith("https://")) {
+    throw new Error(
+      "baseUrl must use HTTPS protocol to protect API keys. " +
+      "HTTP is not allowed as API keys would be transmitted unencrypted. " +
+      "Received: " + url
+    );
+  }
   _baseUrl = url ? url.replace(/\/+$/, "") : null;
 }
 
