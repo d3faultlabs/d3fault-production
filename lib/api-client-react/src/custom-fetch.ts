@@ -28,12 +28,26 @@ let _authTokenGetter: AuthTokenGetter | null = null;
  * ⚠️ SECURITY: baseUrl MUST use HTTPS to protect API keys from exposure.
  */
 export function setBaseUrl(url: string | null): void {
-  if (url && !url.startsWith("https://")) {
-    throw new Error(
-      "baseUrl must use HTTPS protocol to protect API keys. " +
-      "HTTP is not allowed as API keys would be transmitted unencrypted. " +
-      "Received: " + url
-    );
+  if (url) {
+    // Validate URL structure using URL constructor (more robust than string prefix check)
+    let parsedUrl: URL;
+    try {
+      parsedUrl = new URL(url);
+    } catch (error) {
+      throw new Error(
+        `Invalid baseUrl format: ${url}. ` +
+        `Must be a valid URL (e.g., https://api.example.com)`
+      );
+    }
+
+    // Enforce HTTPS protocol for security
+    if (parsedUrl.protocol !== 'https:') {
+      throw new Error(
+        "baseUrl must use HTTPS protocol to protect API keys. " +
+        "HTTP is not allowed as API keys would be transmitted unencrypted. " +
+        `Received protocol: ${parsedUrl.protocol} in URL: ${url}`
+      );
+    }
   }
   _baseUrl = url ? url.replace(/\/+$/, "") : null;
 }
