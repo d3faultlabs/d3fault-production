@@ -760,8 +760,6 @@ export function DocsPage() {
                   </button>
                 ) : <span />}
               </div>
-                </motion.div>
-              </AnimatePresence>
             </div>
           </div>
         </Wrap>
