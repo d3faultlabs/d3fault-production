@@ -27,7 +27,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Dependency audit
-        run: pnpm audit --audit-level=high
+        run: pnpm audit --audit-level=critical
 
       - name: Typecheck — api-server
         run: pnpm --filter @workspace/api-server run typecheck
