@@ -1,6 +1,12 @@
 #!/bin/bash
 # D3FAULT Anchor Program Deployment Script
 # Run this once you have funded the deployer wallet with devnet SOL
+#
+# ⚠️ SECURITY NOTES:
+#   - Do NOT commit keypair.json files to git
+#   - Keep deployer-keypair.json in a secure location only
+#   - Never expose your wallet keypair or private keys
+#   - Use environment variables for sensitive RPC endpoints with API keys
 
 set -e
 

@@ -9,6 +9,12 @@
 #   3. Program binary compiled (see STEP 1 below)
 #   4. Deployer wallet funded with ~1.5 SOL
 #
+# ⚠️ SECURITY NOTES:
+#   - Do NOT commit keypair.json files to git
+#   - Store deployer-keypair.json in a secure location (e.g. 1Password, Vault)
+#   - Use RPC environment variable to avoid hardcoding URLs with API keys
+#   - Never share your deployer wallet or keypair with others
+#
 # Run from the project root: bash deploy-mainnet.sh
 
 set -e

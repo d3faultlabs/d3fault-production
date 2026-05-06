@@ -14,6 +14,13 @@
 #   - Anchor CLI:  anchor --version  (0.29.x)
 #   - Node.js:     node --version    (>= 18)
 #   - pnpm:        pnpm --version
+#
+# ⚠️ SECURITY NOTES:
+#   - Do NOT commit deployer-keypair.json to version control
+#   - Store keypair.json files in a secure location (e.g. 1Password, encrypted storage)
+#   - Use SOLANA_RPC_ENDPOINT env var for URLs with API keys (never commit them)
+#   - Verify RPC URLs use HTTPS before proceeding
+#   - Keep your deployer wallet seed phrase offline and secure
 
 set -e
 
